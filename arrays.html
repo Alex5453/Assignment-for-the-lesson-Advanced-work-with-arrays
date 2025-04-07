@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Результаты — Домашка №3: Массивы</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      color: #2e7d32;
+    }
+    .result {
+      background: #e8f5e9;
+      border: 1px solid #c8e6c9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      color: #2e7d32;
+    }
+  </style>
+</head>
+<body>
+  <h1>Результаты тестов: Массивы</h1>
+  <div id="results"></div>
+
+  <script src="compareArrays.js"></script>
+  <script src="getUsersNamesInAgeRange.js"></script>
+
+  <script>
+    function showResult(message) {
+      const div = document.createElement("div");
+      div.className = "result";
+      div.textContent = message;
+      document.getElementById("results").appendChild(div);
+    }
+
+    // Проверка функции compareArrays
+    showResult(`compareArrays([8, 9], [6]) → ${compareArrays([8, 9], [6])}`);
+    showResult(`compareArrays([1, 2, 3], [2, 3, 1]) → ${compareArrays([1, 2, 3], [2, 3, 1])}`);
+    showResult(`compareArrays([8, 1, 2], [8, 1, 2]) → ${compareArrays([8, 1, 2], [8, 1, 2])}`);
+
+    // Данные для проверки getUsersNamesInAgeRange
+    const people = [
+      {firstName: "Александр", secondName: "Карпов", age: 17, gender: "мужской"},
+      {firstName: "Егор", secondName: "Морозов", age: 21, gender: "мужской"},
+      {firstName: "Мелисса", secondName: "Леонова", age: 40, gender: "женский"},
+      {firstName: "Мелания", secondName: "Савельева", age: 37, gender: "женский"},
+      {firstName: "Мария", secondName: "Овчинникова", age: 18, gender: "женский"},
+      {firstName: "Марьяна", secondName: "Котова", age: 17, gender: "женский"},
+      {firstName: "Фёдор", secondName: "Селезнев", age: 50, gender: "мужской"},
+      {firstName: "Георгий", secondName: "Петров", age: 35, gender: "мужской"},
+      {firstName: "Даниил", secondName: "Андреев", age: 49, gender: "мужской"},
+      {firstName: "Дарья", secondName: "Савельева", age: 25, gender: "женский"},
+      {firstName: "Михаил", secondName: "Шаров", age: 22, gender: "мужской"},
+      {firstName: "Владислав", secondName: "Давыдов", age: 40, gender: "мужской"},
+      {firstName: "Илья", secondName: "Казаков", age: 35, gender: "мужской"},
+      {firstName: "Евгений", secondName: "Кузьмин", age: 19, gender: "мужской"},
+    ];
+
+    // Проверка функции getUsersNamesInAgeRange
+    showResult(`getUsersNamesInAgeRange(people, "мужской") → ${getUsersNamesInAgeRange(people, "мужской")}`);
+    showResult(`getUsersNamesInAgeRange(people, "женский") → ${getUsersNamesInAgeRange(people, "женский")}`);
+    showResult(`getUsersNamesInAgeRange([], "женский") → ${getUsersNamesInAgeRange([], "женский")}`);
+    showResult(`getUsersNamesInAgeRange(people, "инопланетянин") → ${getUsersNamesInAgeRange(people, "инопланетянин")}`);
+  </script>
+</body>
+</html>
