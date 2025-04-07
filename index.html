@@ -2,47 +2,22 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Результаты — Домашка №3: Массивы</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f4f4f4;
-      padding: 20px;
-    }
-    h1 {
-      color: #2e7d32;
-    }
-    .result {
-      background: #e8f5e9;
-      border: 1px solid #c8e6c9;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      color: #2e7d32;
-    }
-  </style>
-</head>
-<body>
-  <h1>Результаты тестов: Массивы</h1>
-  <div id="results"></div>
+  <title>Домашка №3: Массивы — Jasmine</title>
 
+  <!-- Подключение Jasmine -->
+  <link rel="stylesheet" href="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine.css">
+  <script src="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+  <script src="https://unpkg.com/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+  <script src="https://unpkg.com/jasmine-core/lib/jasmine-core/boot0.js"></script>
+  <script src="https://unpkg.com/jasmine-core/lib/jasmine-core/boot1.js"></script>
+
+  <!-- Тестируемые файлы -->
   <script src="compareArrays.js"></script>
   <script src="getUsersNamesInAgeRange.js"></script>
-
+</head>
+<body>
+  <!-- Jasmine сам создаёт контейнер и отображает результаты -->
   <script>
-    function showResult(message) {
-      const div = document.createElement("div");
-      div.className = "result";
-      div.textContent = message;
-      document.getElementById("results").appendChild(div);
-    }
-
-    // Проверка функции compareArrays
-    showResult(`compareArrays([8, 9], [6]) → ${compareArrays([8, 9], [6])}`);
-    showResult(`compareArrays([1, 2, 3], [2, 3, 1]) → ${compareArrays([1, 2, 3], [2, 3, 1])}`);
-    showResult(`compareArrays([8, 1, 2], [8, 1, 2]) → ${compareArrays([8, 1, 2], [8, 1, 2])}`);
-
-    // Данные для проверки getUsersNamesInAgeRange
     const people = [
       {firstName: "Александр", secondName: "Карпов", age: 17, gender: "мужской"},
       {firstName: "Егор", secondName: "Морозов", age: 21, gender: "мужской"},
@@ -60,11 +35,49 @@
       {firstName: "Евгений", secondName: "Кузьмин", age: 19, gender: "мужской"},
     ];
 
-    // Проверка функции getUsersNamesInAgeRange
-    showResult(`getUsersNamesInAgeRange(people, "мужской") → ${getUsersNamesInAgeRange(people, "мужской")}`);
-    showResult(`getUsersNamesInAgeRange(people, "женский") → ${getUsersNamesInAgeRange(people, "женский")}`);
-    showResult(`getUsersNamesInAgeRange([], "женский") → ${getUsersNamesInAgeRange([], "женский")}`);
-    showResult(`getUsersNamesInAgeRange(people, "инопланетянин") → ${getUsersNamesInAgeRange(people, "инопланетянин")}`);
+    describe("Домашнее задание к занятию 3 «Массивы»", function () {
+
+      describe("Задача №1 Сравнить массивы", function () {
+        it("[1, 2, 3] === [1, 2, 3]", function () {
+          expect(compareArrays([1, 2, 3], [1, 2, 3])).toBe(true);
+        });
+
+        it("[1, 2] === [1, 2, 3]", function () {
+          expect(compareArrays([1, 2], [1, 2, 3])).toBe(false);
+        });
+
+        it("[1, 2, 3] === [2, 3, 1]", function () {
+          expect(compareArrays([1, 2, 3], [2, 3, 1])).toBe(false);
+        });
+
+        it("[0, 1, 2] === [0, 1]", function () {
+          expect(compareArrays([0, 1, 2], [0, 1])).toBe(false);
+        });
+
+        it("[8, 9, 5, 4] === [8, 9, 5, 4, 3, 5]", function () {
+          expect(compareArrays([8, 9, 5, 4], [8, 9, 5, 4, 3, 5])).toBe(false);
+        });
+      });
+
+      describe("Задача №2 Получение среднего возраста пользователей одного пола", function () {
+        it("Средний возраст мужчин", function () {
+          expect(getUsersNamesInAgeRange(people, "мужской")).toBe(33.75);
+        });
+
+        it("Средний возраст женщин", function () {
+          expect(getUsersNamesInAgeRange(people, "женский")).toBe(27.4);
+        });
+
+        it("Средний возраст мужской пустого массива должен быть равен нулю", function () {
+          expect(getUsersNamesInAgeRange([], "мужской")).toBe(0);
+        });
+
+        it("Средний возраст несуществующего пола должен быть равен нулю", function () {
+          expect(getUsersNamesInAgeRange(people, "инопланетянин")).toBe(0);
+        });
+      });
+    });
   </script>
 </body>
 </html>
+
